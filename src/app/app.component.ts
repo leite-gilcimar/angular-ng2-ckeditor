@@ -57,6 +57,15 @@ export class AppComponent implements OnInit {
     );
     this.ckeditor.instance.insertElement(link);
   }
+
+  onDrop(event) {
+    console.log(event);
+  }
+
+  onPaste(event) {
+    console.log(event);
+  }
+
   showResult() {
     this.listHmtl = [];
     this.listHmtl.push(CKEDITOR.instances.content.getData());

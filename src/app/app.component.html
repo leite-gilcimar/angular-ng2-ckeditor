@@ -3,6 +3,8 @@
   [config]="ckeConfig"
   #ckeditor
   [(ngModel)]="ckeditorContent"
+  (drop)="onDrop($event)"
+  (paste)="onPaste($event)"
   debounce="500"
 >
   <ckbutton
