@@ -1,4 +1,6 @@
+import { ModalComponent } from "./modal/modal.component";
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatDialog } from "@angular/material";
 declare var CKEDITOR: any;
 
 @Component({
@@ -14,6 +16,8 @@ export class AppComponent implements OnInit {
   file: File;
   listHmtl: string[] = [];
   isShow: boolean = false;
+
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit() {
     this.ckeConfig = {
@@ -70,5 +74,19 @@ export class AppComponent implements OnInit {
     this.listHmtl = [];
     this.listHmtl.push(CKEDITOR.instances.content.getData());
     this.isShow = true;
+  }
+
+  openModal() {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: "250px",
+      data: { name: "TESTE1", animal: "TESTE" },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log("The dialog was closed");
+      if (!!result) {
+        console.log(result);
+      }
+    });
   }
 }

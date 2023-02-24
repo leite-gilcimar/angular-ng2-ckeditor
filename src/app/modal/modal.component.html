@@ -1,0 +1,18 @@
+<p>modal works!</p>
+
+<button
+  mat-raised-button
+  color="primary"
+  style="margin-left: 10px; margin-top: 10px"
+  (click)="fecharModal()"
+>
+  Fechar
+</button>
+<button
+  mat-raised-button
+  color="primary"
+  style="margin-left: 10px; margin-top: 10px"
+  [mat-dialog-close]="nome"
+>
+  OK
+</button>

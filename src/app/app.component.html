@@ -18,7 +18,22 @@
   </ckbutton>
 </ckeditor>
 
-<button style="margin-top: 10px" (click)="showResult()">Mostrar</button>
+<button
+  mat-raised-button
+  color="primary"
+  style="margin-top: 10px"
+  (click)="showResult()"
+>
+  Mostrar
+</button>
+<button
+  mat-raised-button
+  color="primary"
+  style="margin-left: 10px; margin-top: 10px"
+  (click)="openModal()"
+>
+  Modal
+</button>
 <div *ngIf="isShow">
   <div *ngFor="let item of listHmtl">
     <render-html-externo [item]="item"></render-html-externo>
