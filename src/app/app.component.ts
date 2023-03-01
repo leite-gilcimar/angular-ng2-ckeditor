@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
   }
 
   private readFiles(files: FileList) {
-    if (!!files) {
+    if (!!files && files[0].type.startsWith("image/")) {
       this.file = files[0];
       const reader = new FileReader();
       reader.onload = this._handleReaderLoaded.bind(this);
