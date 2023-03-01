@@ -38,15 +38,19 @@ export class AppComponent implements OnInit {
     let input = document.createElement("input");
     input.type = "file";
     input.onchange = (_) => {
-      let files = Array.from(input.files);
-      if (!!files) {
-        this.file = files[0];
-        const reader = new FileReader();
-        reader.onload = this._handleReaderLoaded.bind(this);
-        reader.readAsBinaryString(this.file);
-      }
+      let files: FileList = input.files;
+      this.readFiles(files);
     };
     input.click();
+  }
+
+  private readFiles(files: FileList) {
+    if (!!files) {
+      this.file = files[0];
+      const reader = new FileReader();
+      reader.onload = this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(this.file);
+    }
   }
 
   private _handleReaderLoaded(readerEvt: any) {
@@ -62,12 +66,21 @@ export class AppComponent implements OnInit {
     this.ckeditor.instance.insertElement(link);
   }
 
-  onDrop(event) {
-    console.log(event);
+  onDrop(event: any) {
+    if (!!event.data && event.data.dataTransfer) {
+      const files: FileList = event.data.dataTransfer.$.files;
+      console.log("Drop");
+      this.readFiles(files);
+    }
   }
 
-  onPaste(event) {
-    console.log(event);
+  onPaste(event: any) {
+    const dataTransfer = event.clipboardData;
+    if (!!dataTransfer && dataTransfer.files.length > 0) {
+      const files: FileList = dataTransfer.files;
+      console.log("Paste");
+      this.readFiles(files);
+    }
   }
 
   showResult() {
